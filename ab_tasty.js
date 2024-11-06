@@ -1,5 +1,6 @@
 // utilities
 window.ab_tracking = {
+    version:'2.02',
     prerequisiteEvent:'gtm.js',
     enableDebug: function() {
         localStorage.setItem('ab_debug', true)
@@ -82,7 +83,7 @@ window.ab_tracking = {
     eventExistsByName: function(name) {
     return !!dataLayer.find((e) => e.event === name);
     },
-    proceedWithEventData: function(name, event_data) {
+    proceedWithEventData: function(name, event_data, data) {
         var push_data = JSON.parse(JSON.stringify(event_data));
         if (typeof event_data === 'object' && event_data !== null) {
             for (var prop in event_data) {
@@ -92,7 +93,16 @@ window.ab_tracking = {
             }
         } else {
             console.log('track_event used with a wrong or no event_data argument');
-        }
+        };
+        if (typeof data === 'object' && data !== null) {
+            for (var prop in data) {
+                if (Object.prototype.hasOwnProperty.call(data, prop)) {
+                    push_data[prop] = data[prop];
+                }
+            }
+        } else {
+            console.log('track_event used with a wrong or no event_data argument');
+        };
         push_data.event = name?.toString();
         push_data.experiment_tracking = true;
         delete push_data['gtm.uniqueEventId'];
@@ -134,12 +144,12 @@ function track_event(name, id, data) {
     function onFailure() {
         console.log('track_event used with wrong or no experiment_id');
         ab_tracking.proceedWithEventData(name,{});
-    }
+    };
     ab_tracking.waitForCondition(
         () => ab_tracking.eventExists(id),
         20,
         100,
-        () => ab_tracking.proceedWithEventData(name,ab_tracking.getEventDataById(id)),
+        () => ab_tracking.proceedWithEventData(name,ab_tracking.getEventDataById(id),data),
         onFailure
     );
 };
