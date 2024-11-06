@@ -1,5 +1,6 @@
 // utilities
 window.ab_tracking = {
+    tool:'abtasty',
     version:'2.02',
     prerequisiteEvent:'gtm.js',
     enableDebug: function() {
