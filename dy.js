@@ -2,7 +2,7 @@ function afterVariationSelected(tagId, tagName, experienceName, experience, vari
     if (!window.ab_tracking) {
         window.ab_tracking = {
             tool:'dynamicyield',
-            version:'2.02',
+            version:'2.10',
             prerequisiteEvent:'gtm.js',
             enableDebug: function() {
                 localStorage.setItem('ab_debug', true)
@@ -40,11 +40,13 @@ function afterVariationSelected(tagId, tagName, experienceName, experience, vari
                     var experiment_type = 'multi-parent'
                 } else if (render_type == 'html' && !!tests_array.find(function(e) {return e.touchPointIds.includes(tagId)})) {
                     var experiment_type = 'multi-child'
+                } else if (render_type == 'rcom' && !!tests_array.find(function(e) {return e.touchPointIds.includes(tagId)})) {
+                    var experiment_type = 'rcom-child'
                 } else {
                     var experiment_type = render_type;
                 };
                 var push_event_data = {};
-                if (experiment_type == 'multi-child') {
+                if (experiment_type == 'multi-child' || experiment_type == 'rcom-child') {
                     var experiment_id = tagId.toString();
                     var experiment_parent = tests_array.find(function(e) {return e.touchPointIds.includes(tagId)}).id;
                     var experiment_name_raw = decodeURIComponent(DYO.getTagVariationProperties(tagId).variation.display.name);
@@ -75,14 +77,14 @@ function afterVariationSelected(tagId, tagName, experienceName, experience, vari
             },
             sendViewExperiment: function(pushData, historyData) {
                 var ab_tracking = window.ab_tracking;
-                if (pushData.experiment_type == "html" || pushData.experiment_type == "multi-child") {
+                if (["html", "multi-child", "rcom-child"].includes(pushData.experiment_type)) {
                     ab_tracking.debugLog('sendViewExperiment: event fired');
                     var eventData = pushData;
                     eventData.event = 'view_experiment';
                     eventData.experiment_history = historyData;
                     window.dataLayer.push(eventData);    
                 } else {
-                    ab_tracking.debugLog('sendViewExperiment: not event fired');
+                    ab_tracking.debugLog('sendViewExperiment: event not fired');
                 }
             },
             waitForCondition: function(condition, maxAttempts, interval, onSuccess, onFailure) {
