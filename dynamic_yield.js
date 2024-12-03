@@ -2,7 +2,7 @@ function afterVariationSelected(tagId, tagName, experienceName, experience, vari
     if (!window.ab_tracking) {
         window.ab_tracking = {
             tool:'dynamicyield',
-            version:'2.10',
+            version:'2.11',
             prerequisiteEvent:'gtm.js',
             enableDebug: function() {
                 localStorage.setItem('ab_debug', true)
@@ -104,10 +104,10 @@ function afterVariationSelected(tagId, tagName, experienceName, experience, vari
                 attemptCheck();
             },
             eventExists: function(id) {
-                return !!dataLayer.find((e) => e.event === 'view_experiment' && e.experiment_id === id);
+                return !!dataLayer.find((e) => e.event === 'view_experiment' && e.experiment_id === id.toString());
             },
             getEventDataById: function(id) {
-            return dataLayer.find((e) => e.event === 'view_experiment' && e.experiment_id === id);
+            return dataLayer.find((e) => e.event === 'view_experiment' && e.experiment_id === id.toString());
             },
             eventExistsByName: function(name) {
             return !!dataLayer.find((e) => e.event === name);
