@@ -2,7 +2,7 @@ function afterVariationSelected(tagId, tagName, experienceName, experience, vari
     if (!window.ab_tracking) {
         window.ab_tracking = {
             tool:'dynamicyield',
-            version:'2.11',
+            version:'2.12',
             prerequisiteEvent:'gtm.js',
             enableDebug: function() {
                 localStorage.setItem('ab_debug', true)
