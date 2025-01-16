@@ -40,15 +40,22 @@ function afterVariationSelected(tagId, tagName, experienceName, experience, vari
                     var experiment_type = 'multi-parent'
                 } else if (render_type == 'html' && !!tests_array.find(function(e) {return e.touchPointIds.includes(tagId)})) {
                     var experiment_type = 'multi-child'
-                } else if (render_type == 'rcom' && !!tests_array.find(function(e) {return e.touchPointIds.includes(tagId)})) {
+                } else if (render_type == 'rcom') {
                     var experiment_type = 'rcom-child'
                 } else {
                     var experiment_type = render_type;
                 };
                 var push_event_data = {};
-                if (experiment_type == 'multi-child' || experiment_type == 'rcom-child') {
+                if (experiment_type == 'multi-child') {
                     var experiment_id = tagId.toString();
                     var experiment_parent = tests_array.find(function(e) {return e.touchPointIds.includes(tagId)}).id;
+                    var experiment_name_raw = decodeURIComponent(DYO.getTagVariationProperties(tagId).variation.display.name);
+                    var experiment_goal = experiment_name_raw.split(' | ')[0];    
+                    var experiment_name = experiment_name_raw.split(' | ')[1];
+                    var experiment_variation_id = DYO.getUserObjectsAndVariations().find(function(e) {return e.objectId == experiment_parent}).variationIds[0].toString();
+                    var experiment_variation_name = DYO.getUserObjectsAndVariations().find(function(e) {return e.objectId == experiment_parent}).variations[0];
+                } else if (experiment_type == 'rcom-child') {
+                    var experiment_id = tagId.toString();
                     var experiment_name_raw = decodeURIComponent(DYO.getTagVariationProperties(tagId).variation.display.name);
                     var experiment_goal = experiment_name_raw.split(' | ')[0];    
                     var experiment_name = experiment_name_raw.split(' | ')[1];
