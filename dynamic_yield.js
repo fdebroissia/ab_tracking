@@ -2,7 +2,7 @@ function afterVariationSelected(tagId, tagName, experienceName, experience, vari
     if (!window.ab_tracking) {
         window.ab_tracking = {
             tool:'dynamicyield',
-            version:'2.12',
+            version:'2.13',
             prerequisiteEvent:'gtm.js',
             enableDebug: function() {
                 localStorage.setItem('ab_debug', true)
@@ -56,18 +56,18 @@ function afterVariationSelected(tagId, tagName, experienceName, experience, vari
                     var experiment_variation_name = DYO.getUserObjectsAndVariations().find(function(e) {return e.objectId == experiment_parent}).variations[0];
                 } else if (experiment_type == 'rcom-child') {
                     var experiment_id = tagId.toString();
-                    var experiment_name_raw = decodeURIComponent(DYO.getTagVariationProperties(tagId).variation.display.name);
-                    var experiment_goal = experiment_name_raw.split(' | ')[0];    
-                    var experiment_name = experiment_name_raw.split(' | ')[1];
-                    var experiment_variation_id = DYO.getUserObjectsAndVariations().find(function(e) {return e.objectId == experiment_parent}).variationIds[0].toString();
-                    var experiment_variation_name = DYO.getUserObjectsAndVariations().find(function(e) {return e.objectId == experiment_parent}).variations[0];
-                } else {
-                    var experiment_id = tagId.toString();
                     var experiment_name_raw = decodeURIComponent(experience.name);
+                    var experiment_goal = experiment_name_raw.split(' | ')[0];    
                     var experiment_name = experiment_name_raw.split(' | ')[1];
                     var experiment_variation_id = variations[0].id.toString();
                     var experiment_variation_name = decodeURIComponent(variations[0].name);
+                } else {
+                    var experiment_id = tagId.toString();
+                    var experiment_name_raw = decodeURIComponent(experience.name);
                     var experiment_goal = experiment_name_raw.split(' | ')[0];
+                    var experiment_name = experiment_name_raw.split(' | ')[1];
+                    var experiment_variation_id = variations[0].id.toString();
+                    var experiment_variation_name = decodeURIComponent(variations[0].name);
                 };
                 push_event_data.experiment_id = experiment_id;
                 push_event_data.experiment_name_raw = experiment_name_raw;
