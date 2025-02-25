@@ -28,7 +28,7 @@ window.ab_tracking = {
         var ab_tracking = window.ab_tracking;
         var test_type = data[0];
         var push_event_data = {};
-        if (test_type == 'vS') {
+        if (!!test_type) { // vS or rH
             var experiment_id = data[1];
             var experiment_name_raw = _vwo_exp[experiment_id].name;
             var experiment_name = experiment_name_raw.split(' | ')[1]; // to set to 1 eventually
