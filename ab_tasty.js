@@ -1,7 +1,7 @@
 // utilities
 window.ab_tracking = {
     tool:'abtasty',
-    version:'2.02',
+    version:'2.03',
     prerequisiteEvent:'gtm.js',
     enableDebug: function() {
         localStorage.setItem('ab_debug', true)
