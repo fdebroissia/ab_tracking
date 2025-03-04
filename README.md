@@ -9,5 +9,5 @@ The tools where it is deployed so far are:
 - AB Tasty (https://www.abtasty.com/); we use the account javascript and an eventListener.
 - Dynamic Yield (https://www.dynamicyield.com/); we use the analytics platform integration extension.
 - Kameleoon (https://www.kameleoon.com/); we use a custom integration.
-- VWO (https://vwo.com/); COMING SOON
+- VWO (https://vwo.com/); we use the sitewide javascript and an eventListener (note: the sitewide js must be extended to a least 10kb - check with VWO teams).
 - Optimizely (https://www.optimizely.com/); COMING SOON
