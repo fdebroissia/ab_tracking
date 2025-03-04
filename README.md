@@ -11,3 +11,6 @@ The tools where it is deployed so far are:
 - Kameleoon (https://www.kameleoon.com/); we use a custom integration.
 - VWO (https://vwo.com/); we use the sitewide javascript and an eventListener (note: the sitewide js must be extended to a least 10kb - check with VWO teams).
 - Optimizely (https://www.optimizely.com/); COMING SOON
+
+Feel free to use it, but please credit Jellyfish / François de Broissia.
+If you use it without support from analytics expert (Jellyfish or otherwise), you *will* have issues in time. The code (like any code) is not self-sufficient.
