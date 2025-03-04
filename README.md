@@ -8,6 +8,6 @@ The framework will:
 The tools where it is deployed so far are:
 - AB Tasty (https://www.abtasty.com/); we use the account javascript and an eventListener.
 - Dynamic Yield (https://www.dynamicyield.com/); we use the analytics platform integration extension.
-- Kameleoon (https://www.kameleoon.com/); COMING SOON
+- Kameleoon (https://www.kameleoon.com/); we use a custom integration.
 - VWO (https://vwo.com/); COMING SOON
 - Optimizely (https://www.optimizely.com/); COMING SOON
