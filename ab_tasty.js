@@ -1,7 +1,7 @@
 // utilities
 window.ab_tracking = {
     tool:'abtasty',
-    version:'2.03',
+    version:'2.10',
     prerequisiteEvent:'gtm.js',
     enableDebug: function() {
         localStorage.setItem('ab_debug', true)
@@ -57,7 +57,9 @@ window.ab_tracking = {
         var eventData = pushData;
         eventData.event = 'view_experiment';
         eventData.experiment_history = historyData;
-        window.dataLayer.push(eventData);
+        if (eventData.experiment_goal !== 'no-tracking') {
+          window.dataLayer.push(eventData);
+        };
     },
     waitForCondition: function(condition, maxAttempts, interval, onSuccess, onFailure) {
         let attempts = 0;
